@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-payment
+  labels:
+    app: api-payment
+spec:
+  template:
+    metadata:
+      name: api-payment
+      labels:
+        app: api-payment
+    spec:
+      containers:
+        - name: api-payment-container
+          image: 572978752108.dkr.ecr.us-east-1.amazonaws.com/lanchonete-55/api-payment:main
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 1
+              memory: 256Mi
+          envFrom:
+            - secretRef:
+                name: api-payment-secrets
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-payment

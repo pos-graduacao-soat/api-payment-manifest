@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-payment-mongo
+  labels:
+    app: api-payment-mongo
+spec:
+  template:
+    metadata:
+      name: api-payment-mongo
+      labels:
+        app: api-payment-mongo
+    spec:
+      containers:
+        - name: api-payment-mongo-container
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /var/lib/mongodb
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+          envFrom:
+            - secretRef:
+                name: db-api-payment-secrets
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: pvc-db-api-payment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-payment-mongo
