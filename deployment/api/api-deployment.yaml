@@ -23,7 +23,7 @@ spec:
           envFrom:
             - secretRef:
                 name: api-payment-secrets
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: api-payment
