@@ -21,8 +21,8 @@ spec:
               mountPath: /var/lib/mongodb
           resources:
             limits:
-              cpu: 1
-              memory: 1Gi
+              cpu: 100m
+              memory: 128Mi
           envFrom:
             - secretRef:
                 name: db-api-payment-secrets
