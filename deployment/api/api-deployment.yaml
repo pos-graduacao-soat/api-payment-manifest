@@ -22,7 +22,7 @@ spec:
               memory: 128Mi
           env: 
             - name: ORDERS_API_URL
-              value: http://api-orders-service:3000.
+              value: http://api-orders-service:3000
           envFrom:
             - secretRef:
                 name: api-payment-secrets
